@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form>
+    <div class="form-group">
+    <label for="jsonData">Enter Json Data:</label>
+    <textarea type="text" id="jsonData" class="form-control" name="Json Data" placeholder="Enter json Data" rows="7" cols="50"></textarea>
+    </div>
+    <button type="submit" id="submitJson" class="btn btn-primary">Submit</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token }}';
+    $('#submitJson').click(function(e){
+        e.preventDefault();
+        var jsonData = $('#jsonData').val();
+        var csrftoken = '{{ csrf_token }}';
+
+        //console.log("JsonData", jsonData);
+        //console.log("CsrfToken", csrftoken);
+
+        let data = new FormData();
+
+        data.append('jsonData', jsonData);
+        data.append('csrfmiddlewaretoken', csrftoken);
+
+        axios.post('/submitjson/', data)
+            .then(res => alert("Form Submitted"))
+            .catch(err => console.log(err));
+        });
+    
+</script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+
+<form method="post" name="jsondata" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+    <label for="jsonData">Enter Json Data:</label>
+    <textarea type="text" id="jsonData" class="form-control" name="JsonData" placeholder="Enter json Data, check test_data.json file in rootdir" rows="7" cols="50"></textarea>
+    </div>
+    <button type="submit" id="submitJson" class="btn btn-primary">Submit</button>
+</form>
+
+    
+    {% endblock %}  
